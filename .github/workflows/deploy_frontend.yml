@@ -42,7 +42,7 @@ jobs:
         id: tf_outputs
         run: |
           cd backend/terraform
-          terraform init -backend-config="bucket=${{ secrets.TF_STATE_BUCKET || format('booking-terraform-state-{0}-us-east-1', secrets.AWS_ACCOUNT_ID) }}"
+          terraform init
           export API_URL=$(terraform output -raw api_url)
           export COGNITO_USER_POOL_ID=$(terraform output -raw cognito_user_pool_id)
           export COGNITO_DOMAIN=$(terraform output -raw cognito_domain)

@@ -49,7 +49,7 @@ jobs:
 
       - name: Terraform Init
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform init -backend-config="bucket=${{ secrets.TF_STATE_BUCKET || format('booking-terraform-state-{0}-us-east-1', secrets.AWS_ACCOUNT_ID) }}"
+        run: terraform init
 
       - name: Terraform Validate
         working-directory: ${{ env.TF_WORKING_DIR }}
@@ -97,7 +97,7 @@ jobs:
 
       - name: Terraform Init
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform init -backend-config="bucket=${{ secrets.TF_STATE_BUCKET || format('booking-terraform-state-{0}-us-east-1', secrets.AWS_ACCOUNT_ID) }}"
+        run: terraform init
 
       - name: Terraform Apply
         working-directory: ${{ env.TF_WORKING_DIR }}
