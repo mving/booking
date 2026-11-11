@@ -1,0 +1,634 @@
+{
+  "buildings": [
+    {
+      "building_id": "bldg-libertador-01",
+      "slug": "torre-libertador",
+      "name": "Torre Libertador 2400",
+      "address": "Av. del Libertador 2400, CABA",
+      "registration_password_hash": "de054b5c877a52d29636a7cad8648b10eccd1d000fde408a4118aab2038314e2",
+      "registration_password_hint": "QUINCHO2026",
+      "max_users_per_unit": 3,
+      "blocked_user_message": "No puede efectuar reservas de amenities por registrar deuda de expensas pendiente. Por favor, comuníquese con la administración del consorcio.",
+      "timezone": "America/Argentina/Buenos_Aires",
+      "blocked_units": [
+        "5C"
+      ],
+      "is_active": true,
+      "created_at": "2026-11-11T05:58:21.698Z"
+    },
+    {
+      "building_id": "bldg-palermo-02",
+      "slug": "aires-palermo",
+      "name": "Aires de Palermo Soho",
+      "address": "Thames 1850, CABA",
+      "registration_password_hash": "b6fe4c3460f7029020149c3d51e728002a4f600a4bfb73e6982b02d266cb41a7",
+      "registration_password_hint": "PALERMO2026",
+      "max_users_per_unit": 2,
+      "blocked_user_message": "Su unidad funcional presenta saldo pendiente de expensas. Regularice su situación para reservar.",
+      "timezone": "America/Argentina/Buenos_Aires",
+      "blocked_units": [],
+      "is_active": true,
+      "created_at": "2026-11-11T05:58:21.698Z"
+    }
+  ],
+  "users": [
+    {
+      "user_id": "usr-global-admin",
+      "building_id": "GLOBAL",
+      "email": "admin@edificio.com",
+      "first_name": "Manuel",
+      "last_name": "Administrador Global",
+      "unit_number": "ADMIN-GLOBAL",
+      "unit_key": "ADMINGLOBAL",
+      "resident_type": "staff",
+      "role": "global_admin",
+      "status": "ACTIVE",
+      "is_blocked": false,
+      "email_verified": true,
+      "created_at": "2026-11-11T05:58:21.698Z"
+    },
+    {
+      "user_id": "usr-local-admin-1",
+      "building_id": "bldg-libertador-01",
+      "email": "consorcio@libertador.com",
+      "first_name": "Laura",
+      "last_name": "Gómez (Admin Edificio)",
+      "unit_number": "Administración",
+      "unit_key": "ADM",
+      "resident_type": "staff",
+      "role": "building_admin",
+      "status": "ACTIVE",
+      "is_blocked": false,
+      "email_verified": true,
+      "created_at": "2026-11-11T05:58:21.698Z"
+    },
+    {
+      "user_id": "usr-owner-4b",
+      "building_id": "bldg-libertador-01",
+      "email": "propietario4b@gmail.com",
+      "first_name": "Martín",
+      "last_name": "Alvarez",
+      "unit_number": "UF 42 - 4° B",
+      "unit_key": "424B",
+      "resident_type": "owner",
+      "role": "resident",
+      "status": "ACTIVE",
+      "is_blocked": false,
+      "email_verified": true,
+      "created_at": "2026-11-11T05:58:21.698Z"
+    },
+    {
+      "user_id": "usr-tenant-4b",
+      "building_id": "bldg-libertador-01",
+      "email": "inquilino4b@gmail.com",
+      "first_name": "Sofía",
+      "last_name": "Pereyra",
+      "unit_number": "UF 42 - 4° B",
+      "unit_key": "424B",
+      "resident_type": "tenant",
+      "role": "resident",
+      "status": "ACTIVE",
+      "is_blocked": false,
+      "email_verified": true,
+      "created_at": "2026-11-11T05:58:21.698Z"
+    },
+    {
+      "user_id": "usr-blocked-5c",
+      "building_id": "bldg-libertador-01",
+      "email": "deudor5c@gmail.com",
+      "first_name": "Roberto",
+      "last_name": "Sánchez",
+      "unit_number": "UF 53 - 5° C",
+      "unit_key": "535C",
+      "resident_type": "owner",
+      "role": "resident",
+      "status": "ACTIVE",
+      "is_blocked": true,
+      "email_verified": true,
+      "created_at": "2026-11-11T05:58:21.698Z"
+    },
+    {
+      "user_id": "usr-deactivated-4b",
+      "building_id": "bldg-libertador-01",
+      "email": "exinquilino@gmail.com",
+      "first_name": "Lucas",
+      "last_name": "Méndez (Ex Inquilino)",
+      "unit_number": "UF 42 - 4° B",
+      "unit_key": "424B",
+      "resident_type": "tenant",
+      "role": "resident",
+      "status": "DEACTIVATED",
+      "is_blocked": false,
+      "email_verified": true,
+      "deactivated_at": "2026-11-11T05:58:21.698Z",
+      "deactivated_by": "usr-owner-4b (owner)",
+      "ttl": 1825912701,
+      "created_at": "2026-11-11T05:58:21.698Z"
+    },
+    {
+      "user_id": "usr-security-1",
+      "building_id": "bldg-libertador-01",
+      "email": "seguridad@libertador.com",
+      "first_name": "Jorge",
+      "last_name": "Guardia Portería",
+      "unit_number": "Garita Principal",
+      "unit_key": "SEGURIDAD",
+      "resident_type": "staff",
+      "role": "security",
+      "status": "ACTIVE",
+      "is_blocked": false,
+      "email_verified": true,
+      "created_at": "2026-11-11T05:58:21.698Z"
+    }
+  ],
+  "amenities": [
+    {
+      "building_id": "bldg-libertador-01",
+      "amenity_id": "am-quincho-parrilla",
+      "name": "Reserva Parrilla / Quincho",
+      "description": "Sector de parrillas y mesas del quincho. Permite compartir espacio entre vecinos hasta cubrir la capacidad máxima de 20 personas por turno.",
+      "allow_comments": true,
+      "max_capacity": 20,
+      "max_bookings_per_day": 4,
+      "no_shifts": false,
+      "show_on_home": true,
+      "schedule": {
+        "0": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        },
+        "1": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        },
+        "2": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        },
+        "3": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        },
+        "4": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        },
+        "5": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        },
+        "6": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        }
+      },
+      "is_active": true,
+      "created_at": "2026-11-11T05:58:21.698Z"
+    },
+    {
+      "building_id": "bldg-libertador-01",
+      "amenity_id": "am-pileta-invitados",
+      "name": "Invitados Pileta",
+      "description": "Registro obligatorio de invitados para uso de pileta y solárium. Por privacidad entre vecinos no se publica en la pantalla principal (visible solo en Mis Reservas, Administración y Seguridad).",
+      "allow_comments": true,
+      "max_capacity": 15,
+      "max_bookings_per_day": 6,
+      "no_shifts": true,
+      "show_on_home": false,
+      "schedule": {
+        "0": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Horario Completo Pileta",
+              "start_time": "09:00",
+              "end_time": "20:00"
+            }
+          ]
+        },
+        "1": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Horario Completo Pileta",
+              "start_time": "09:00",
+              "end_time": "20:00"
+            }
+          ]
+        },
+        "2": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Horario Completo Pileta",
+              "start_time": "09:00",
+              "end_time": "20:00"
+            }
+          ]
+        },
+        "3": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Horario Completo Pileta",
+              "start_time": "09:00",
+              "end_time": "20:00"
+            }
+          ]
+        },
+        "4": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Horario Completo Pileta",
+              "start_time": "09:00",
+              "end_time": "20:00"
+            }
+          ]
+        },
+        "5": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Horario Completo Pileta",
+              "start_time": "09:00",
+              "end_time": "20:00"
+            }
+          ]
+        },
+        "6": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Horario Completo Pileta",
+              "start_time": "09:00",
+              "end_time": "20:00"
+            }
+          ]
+        }
+      },
+      "is_active": true,
+      "created_at": "2026-11-11T05:58:21.698Z"
+    },
+    {
+      "building_id": "bldg-libertador-01",
+      "amenity_id": "am-sum-exclusivo",
+      "name": "SUM Principal (Exclusivo)",
+      "description": "Salón de Usos Múltiples de uso exclusivo (máximo 1 reserva por día/turno, hasta 35 invitados).",
+      "allow_comments": true,
+      "max_capacity": 35,
+      "max_bookings_per_day": 1,
+      "no_shifts": false,
+      "show_on_home": true,
+      "schedule": {
+        "0": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        },
+        "1": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        },
+        "2": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        },
+        "3": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        },
+        "4": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        },
+        "5": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        },
+        "6": {
+          "enabled": true,
+          "shifts": [
+            {
+              "id": "SHIFT_1",
+              "name": "Turno Mediodía",
+              "start_time": "11:00",
+              "end_time": "16:30"
+            },
+            {
+              "id": "SHIFT_2",
+              "name": "Turno Noche",
+              "start_time": "19:30",
+              "end_time": "01:30"
+            }
+          ]
+        }
+      },
+      "is_active": true,
+      "created_at": "2026-11-11T05:58:21.698Z"
+    }
+  ],
+  "reservations": [
+    {
+      "building_id": "bldg-libertador-01",
+      "reservation_sk": "DATE#2026-11-11#AMENITY#am-quincho-parrilla#RES#res-demo-1",
+      "reservation_id": "res-demo-1",
+      "user_id": "usr-owner-4b",
+      "user_full_name": "Martín Alvarez",
+      "unit_number": "UF 42 - 4° B",
+      "unit_key": "424B",
+      "amenity_id": "am-quincho-parrilla",
+      "amenity_name": "Reserva Parrilla / Quincho",
+      "date": "2026-11-11",
+      "shift_id": "SHIFT_2",
+      "shift_label": "Turno Noche (19:30 - 01:30)",
+      "custom_time": "20:00",
+      "guests_count": 10,
+      "comments": "Cena familiar - Familia Alvarez (10 invitados)",
+      "show_on_home": true,
+      "status": "CONFIRMED",
+      "created_at": "2026-11-11T05:58:21.698Z",
+      "ttl": 1802228399
+    },
+    {
+      "building_id": "bldg-libertador-01",
+      "reservation_sk": "DATE#2026-11-11#AMENITY#am-pileta-invitados#RES#res-demo-2",
+      "reservation_id": "res-demo-2",
+      "user_id": "usr-tenant-4b",
+      "user_full_name": "Sofía Pereyra",
+      "unit_number": "UF 42 - 4° B",
+      "unit_key": "424B",
+      "amenity_id": "am-pileta-invitados",
+      "amenity_name": "Invitados Pileta",
+      "date": "2026-11-11",
+      "shift_id": "NO_SHIFT",
+      "shift_label": "Sin turno fijo (Ingreso 14:30 hs)",
+      "custom_time": "14:30",
+      "guests_count": 4,
+      "comments": "Invitados: Camila Díaz, Tomás Ruiz, Julieta Paz y Nicolás Gil",
+      "show_on_home": false,
+      "status": "CONFIRMED",
+      "created_at": "2026-11-11T05:58:21.699Z",
+      "ttl": 1802228399
+    },
+    {
+      "building_id": "bldg-libertador-01",
+      "reservation_sk": "DATE#2026-11-12#AMENITY#am-quincho-parrilla#RES#res-demo-3",
+      "reservation_id": "res-demo-3",
+      "user_id": "usr-tenant-4b",
+      "user_full_name": "Sofía Pereyra",
+      "unit_number": "UF 42 - 4° B",
+      "unit_key": "424B",
+      "amenity_id": "am-quincho-parrilla",
+      "amenity_name": "Reserva Parrilla / Quincho",
+      "date": "2026-11-12",
+      "shift_id": "SHIFT_1",
+      "shift_label": "Turno Mediodía (11:00 - 16:30)",
+      "custom_time": "12:00",
+      "guests_count": 8,
+      "comments": "Almuerzo con amigos",
+      "show_on_home": true,
+      "status": "CONFIRMED",
+      "created_at": "2026-11-11T05:58:21.699Z",
+      "ttl": 1802314799
+    },
+    {
+      "building_id": "bldg-libertador-01",
+      "reservation_sk": "DATE#2026-11-09#AMENITY#am-quincho-parrilla#RES#res-demo-past",
+      "reservation_id": "res-demo-past",
+      "user_id": "usr-owner-4b",
+      "user_full_name": "Martín Alvarez",
+      "unit_number": "UF 42 - 4° B",
+      "unit_key": "424B",
+      "amenity_id": "am-quincho-parrilla",
+      "amenity_name": "Reserva Parrilla / Quincho",
+      "date": "2026-11-09",
+      "shift_id": "SHIFT_2",
+      "shift_label": "Turno Noche (19:30 - 01:30)",
+      "custom_time": "20:30",
+      "guests_count": 12,
+      "comments": "Reserva histórica dentro de la ventana de 90 días",
+      "show_on_home": true,
+      "status": "CONFIRMED",
+      "created_at": "2026-11-11T05:58:21.699Z",
+      "ttl": 1802055599
+    },
+    {
+      "building_id": "bldg-libertador-01",
+      "reservation_sk": "DATE#2026-11-11#AMENITY#am-quincho-parrilla#RES#res-6a4f405f",
+      "reservation_id": "res-6a4f405f",
+      "user_id": "usr-owner-4b",
+      "user_full_name": "Martín Alvarez",
+      "unit_number": "UF 42 - 4° B",
+      "unit_key": "424B",
+      "amenity_id": "am-quincho-parrilla",
+      "amenity_name": "Reserva Parrilla / Quincho",
+      "date": "2026-11-11",
+      "shift_id": "SHIFT_1",
+      "shift_label": "Turno Mediodía (11:00 - 16:30)",
+      "custom_time": "",
+      "guests_count": 12,
+      "comments": "Asado familiar",
+      "show_on_home": true,
+      "status": "CONFIRMED",
+      "created_at": "2026-11-11T07:11:33.041Z",
+      "ttl": 1802228399
+    },
+    {
+      "building_id": "bldg-libertador-01",
+      "reservation_sk": "DATE#2026-11-11#AMENITY#am-quincho-parrilla#RES#res-6c60e049",
+      "reservation_id": "res-6c60e049",
+      "user_id": "usr-tenant-4b",
+      "user_full_name": "Sofía Pereyra",
+      "unit_number": "UF 42 - 4° B",
+      "unit_key": "424B",
+      "amenity_id": "am-quincho-parrilla",
+      "amenity_name": "Reserva Parrilla / Quincho",
+      "date": "2026-11-11",
+      "shift_id": "SHIFT_1",
+      "shift_label": "Turno Mediodía (11:00 - 16:30)",
+      "custom_time": "",
+      "guests_count": 8,
+      "comments": "",
+      "show_on_home": true,
+      "status": "CONFIRMED",
+      "created_at": "2026-11-11T07:11:33.121Z",
+      "ttl": 1802228399
+    }
+  ]
+}

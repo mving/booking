@@ -1,0 +1,12 @@
+{
+  "name": "booking-api-lambda",
+  "version": "1.0.0",
+  "description": "AWS Lambda API Handler for Multi-Building Amenity Booking System",
+  "type": "module",
+  "main": "index.mjs",
+  "dependencies": {
+    "date-fns": "^3.6.0",
+    "date-fns-tz": "^3.2.0"
+  }
+}
+

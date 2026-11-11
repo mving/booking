@@ -1,0 +1,82 @@
+name: Deploy Frontend SPA (S3 + CloudFront)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/deploy_frontend.yml'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy_frontend:
+    name: Build and Deploy SPA to S3 & CloudFront
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Configurar credenciales AWS (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.x
+          terraform_wrapper: false
+
+      - name: Obtener variables desde Terraform Outputs
+        id: tf_outputs
+        run: |
+          cd backend/terraform
+          terraform init -backend-config="bucket=uade-qr-terraform-state-${{ secrets.AWS_ACCOUNT_ID }}-us-east-1-an"
+          export API_URL=$(terraform output -raw api_url)
+          export COGNITO_USER_POOL_ID=$(terraform output -raw cognito_user_pool_id)
+          export COGNITO_DOMAIN=$(terraform output -raw cognito_domain)
+          export COGNITO_CLIENT_ID=$(terraform output -raw cognito_client_id)
+          export S3_BUCKET=$(terraform output -raw frontend_s3_bucket)
+          export CLOUDFRONT_URL=$(terraform output -raw frontend_cloudfront_url)
+          export CLOUDFRONT_ID=$(terraform output -raw frontend_cloudfront_id)
+
+          echo "api_url=$API_URL" >> $GITHUB_OUTPUT
+          echo "cognito_user_pool_id=$COGNITO_USER_POOL_ID" >> $GITHUB_OUTPUT
+          echo "cognito_domain=$COGNITO_DOMAIN" >> $GITHUB_OUTPUT
+          echo "cognito_client_id=$COGNITO_CLIENT_ID" >> $GITHUB_OUTPUT
+          echo "s3_bucket=$S3_BUCKET" >> $GITHUB_OUTPUT
+          echo "cloudfront_url=$CLOUDFRONT_URL" >> $GITHUB_OUTPUT
+          echo "cloudfront_id=$CLOUDFRONT_ID" >> $GITHUB_OUTPUT
+
+      - name: Build Frontend SPA
+        working-directory: ./frontend
+        env:
+          VITE_API_URL: "/api"
+          VITE_COGNITO_USER_POOL_ID: ${{ steps.tf_outputs.outputs.cognito_user_pool_id }}
+          VITE_COGNITO_DOMAIN: ${{ steps.tf_outputs.outputs.cognito_domain }}
+          VITE_COGNITO_CLIENT_ID: ${{ steps.tf_outputs.outputs.cognito_client_id }}
+          VITE_COGNITO_REDIRECT_URI: "${{ steps.tf_outputs.outputs.cloudfront_url }}/auth/callback"
+          VITE_APP_VERSION: "1.0.${{ github.run_number }}"
+        run: |
+          npm install
+          npm run build
+
+      - name: Sync a S3 e Invalidar Caché de CloudFront
+        working-directory: ./frontend
+        run: |
+          aws s3 sync dist/ s3://${{ steps.tf_outputs.outputs.s3_bucket }} --delete
+          if [ -n "${{ steps.tf_outputs.outputs.cloudfront_id }}" ]; then
+            aws cloudfront create-invalidation --distribution-id ${{ steps.tf_outputs.outputs.cloudfront_id }} --paths "/*"
+          fi
+
