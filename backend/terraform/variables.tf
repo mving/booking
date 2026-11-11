@@ -25,6 +25,6 @@ variable "google_sso_ssm_parameter_name" {
 variable "initial_global_admin_email" {
   description = "Email del Administrador Global inicial del sistema"
   type        = string
-  default     = "admin@edificio.com"
+  default     = "manuelvidal097@gmail.com"
 }
 

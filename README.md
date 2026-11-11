@@ -64,6 +64,27 @@ npm --prefix frontend run dev
 
 ---
 
+## Creación del Primer Administrador Global (Admin Maestro)
+
+El sistema utiliza un mecanismo de **Bootstrap Automático** que no requiere insertar registros manualmente en DynamoDB:
+
+1. **Configurar tu Email Maestro**:
+   En [`backend/terraform/variables.tf`](./backend/terraform/variables.tf), asigná tu correo en la variable `initial_global_admin_email` (o pasalo en el comando de despliegue con `-var="initial_global_admin_email=tu_correo@gmail.com"`):
+   ```hcl
+   variable "initial_global_admin_email" {
+     default = "tu_correo@gmail.com"
+   }
+   ```
+2. **Iniciar Sesión**:
+   - Accedé a la aplicación e iniciá sesión con **Google SSO** (o registrate con Email y Contraseña verificando el código de confirmación enviado por Cognito).
+   - En la primera solicitud que llega a la API, la función Lambda detecta que el email verificado coincide con `INITIAL_GLOBAL_ADMIN` e inserta automáticamente el registro maestro en DynamoDB con `role: "global_admin"` y `building_id: "GLOBAL"`.
+3. **Comenzar a Crear Edificios y Administradores Locales**:
+   - Una vez autenticado, aparecerá en el menú superior la pestaña **"Admin Global"**.
+   - Desde allí, hacés clic en **"Nuevo Edificio"**, completás el nombre, dirección, slug de la URL fija de registro (`/registro/:slug`), la contraseña del edificio y el **Email del Administrador Local**.
+   - Ese administrador local podrá ingresar al sistema y configurar los amenities, horarios y vecinos de su consorcio.
+
+---
+
 ## Despliegue en AWS (GitHub Actions)
 
 1. **Desplegar Infraestructura y Backend**: Ejecutar el workflow `.github/workflows/deploy_backend.yml` (`Deploy Booking Backend (Terraform)`).

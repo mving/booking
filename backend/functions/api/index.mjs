@@ -13,7 +13,7 @@ const RESERVATIONS_TABLE = process.env.RESERVATIONS_TABLE || "booking_reservatio
 const REGISTRATION_TOKEN_SECRET =
   process.env.REGISTRATION_TOKEN_SECRET || "local-dev-secret-key-booking-2026";
 const INITIAL_GLOBAL_ADMIN = (
-  process.env.INITIAL_GLOBAL_ADMIN || "admin@edificio.com"
+  process.env.INITIAL_GLOBAL_ADMIN || "manuelvidal097@gmail.com"
 ).toLowerCase();
 const USER_POOL_ID = process.env.USER_POOL_ID || "";
 
