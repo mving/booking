@@ -44,10 +44,11 @@ resource "aws_cognito_identity_provider" "google_provider" {
   }
 
   attribute_mapping = {
-    email       = "email"
-    given_name  = "given_name"
-    family_name = "family_name"
-    username    = "sub"
+    email          = "email"
+    email_verified = "email_verified"
+    given_name     = "given_name"
+    family_name    = "family_name"
+    username       = "sub"
   }
 
   lifecycle {

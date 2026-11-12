@@ -1102,11 +1102,22 @@ function parseAuthIdentity(event) {
   // 1. Claims provistos por API Gateway Cognito User Pools Authorizer
   const claims = event?.requestContext?.authorizer?.claims;
   if (claims && claims.email) {
+    const cognitoUsername = String(claims["cognito:username"] || "");
+    const identitiesStr =
+      typeof claims.identities === "string"
+        ? claims.identities
+        : JSON.stringify(claims.identities || "");
+    const isGoogleFederated =
+      cognitoUsername.toLowerCase().startsWith("google_") ||
+      identitiesStr.toLowerCase().includes("google");
+
     return {
       sub: claims.sub || claims["cognito:username"],
       email: String(claims.email).toLowerCase(),
       email_verified:
-        claims.email_verified === "true" || claims.email_verified === true,
+        claims.email_verified === "true" ||
+        claims.email_verified === true ||
+        isGoogleFederated,
       given_name: claims.given_name || "",
       family_name: claims.family_name || "",
     };
