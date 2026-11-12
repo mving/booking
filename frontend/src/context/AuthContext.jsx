@@ -48,7 +48,7 @@ export function AuthProvider({ children }) {
   const [selectedBuildingId, setSelectedBuildingId] = useState("");
   const [authError, setAuthError] = useState("");
 
-  const refreshProfile = useCallback(async () => {
+  const refreshProfile = useCallback(async ({ throwOnError = false } = {}) => {
     const token = getStoredToken();
     if (!token) {
       setMeData(null);
@@ -76,6 +76,9 @@ export function AuthProvider({ children }) {
       setAuthError(err.message || "Error al verificar sesión");
       setMeData(null);
       setLoading(false);
+      if (throwOnError) {
+        throw err;
+      }
       return null;
     }
   }, []);

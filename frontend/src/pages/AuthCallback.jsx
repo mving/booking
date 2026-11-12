@@ -62,10 +62,10 @@ export function AuthCallback() {
           clearPendingRegistration();
         }
 
-        const me = await refreshProfile();
+        const me = await refreshProfile({ throwOnError: true });
         if (!me) {
           setErrorMsg(
-            "Cognito validó tu cuenta, pero no se pudo obtener tu perfil desde el servidor (/api/me)."
+            "Cognito validó tu cuenta, pero no se recibió respuesta válida desde el servidor (/api/me)."
           );
           return;
         }

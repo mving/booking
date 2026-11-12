@@ -72,9 +72,8 @@ export async function apiFetch(endpoint, options = {}) {
   }
 
   if (!res.ok) {
-    const err = new Error(
-      data.error || data.message || `Error HTTP ${res.status}`
-    );
+    const detail = data.error || data.message || res.statusText || "Error desconocido";
+    const err = new Error(`HTTP ${res.status}: ${detail}`);
     err.status = res.status;
     err.code = data.code;
     throw err;
