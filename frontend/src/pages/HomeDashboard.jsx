@@ -103,7 +103,10 @@ export function HomeDashboard() {
   );
 
   const loadDashboardData = useCallback(async () => {
-    if (!buildingId) return;
+    if (!buildingId) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const [amData, myResData, pubResData] = await Promise.all([
@@ -315,6 +318,27 @@ export function HomeDashboard() {
     return (
       <div className="container py-12 text-center text-muted-foreground">
         Cargando reservas y amenities del edificio...
+      </div>
+    );
+  }
+
+  if (!buildingId) {
+    return (
+      <div className="container max-w-xl py-12 px-4">
+        <Alert>
+          <Info className="h-4 w-4" />
+          <AlertTitle>Aún no estás vinculado a un edificio</AlertTitle>
+          <AlertDescription className="mt-2 space-y-2">
+            <p>
+              Tu cuenta está autenticada, pero todavía no completaste el registro en
+              ningún consorcio ni hay un edificio seleccionado.
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Solicitá a la administración el enlace fijo de registro de tu edificio (
+              <code>/registro/nombre-edificio</code>) y su contraseña de acceso.
+            </p>
+          </AlertDescription>
+        </Alert>
       </div>
     );
   }

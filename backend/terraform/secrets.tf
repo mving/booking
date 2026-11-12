@@ -20,3 +20,9 @@ resource "random_password" "registration_token_secret" {
   special = false
 }
 
+# Secreto compartido entre CloudFront y API Gateway Resource Policy para prevenir evasión directa
+resource "random_password" "cloudfront_origin_secret" {
+  length  = 40
+  special = false
+}
+

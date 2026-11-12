@@ -5,7 +5,8 @@ resource "aws_api_gateway_rest_api" "booking_api" {
 
 # Prevención de Evasión de CloudFront (Seguridad Perimetral):
 # Resource Policy que restringe el tráfico para que únicamente acepte peticiones
-# cuyo origen (aws:SourceArn) coincida con el de la distribución de Amazon CloudFront.
+# que arriban desde Amazon CloudFront portando el secreto de origen (aws:Referer)
+# además de la x-api-key inyectada por CloudFront. (aws:SourceArn no es poblado por CloudFront en orígenes HTTP).
 data "aws_iam_policy_document" "apigw_cloudfront_only" {
   statement {
     sid    = "AllowInvokeFromCloudFrontOnly"
@@ -17,12 +18,12 @@ data "aws_iam_policy_document" "apigw_cloudfront_only" {
     }
 
     actions   = ["execute-api:Invoke"]
-    resources = ["${aws_api_gateway_rest_api.booking_api.execution_arn}/*/*/*"]
+    resources = ["${aws_api_gateway_rest_api.booking_api.execution_arn}/*"]
 
     condition {
-      test     = "ArnLike"
-      variable = "aws:SourceArn"
-      values   = [aws_cloudfront_distribution.frontend_distribution.arn]
+      test     = "StringEquals"
+      variable = "aws:Referer"
+      values   = ["https://cf-origin-guard.internal/${random_password.cloudfront_origin_secret.result}"]
     }
   }
 }
@@ -149,7 +150,8 @@ resource "aws_api_gateway_deployment" "prod" {
       aws_api_gateway_resource.api_proxy.id,
       aws_api_gateway_method.proxy_any.id,
       aws_api_gateway_integration.proxy_any_integration.id,
-      aws_api_gateway_rest_api_policy.booking_api_policy.id
+      aws_api_gateway_rest_api_policy.booking_api_policy.id,
+      data.aws_iam_policy_document.apigw_cloudfront_only.json
     ]))
   }
 

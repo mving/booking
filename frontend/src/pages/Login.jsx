@@ -30,13 +30,23 @@ import { Badge } from "@/components/ui/badge";
 
 export function Login() {
   const navigate = useNavigate();
-  const { refreshProfile, switchDemoAccount } = useAuth();
+  const { refreshProfile, switchDemoAccount, meData, authError } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [buildings, setBuildings] = useState([]);
+
+  useEffect(() => {
+    if (meData?.authenticated) {
+      if (meData.is_global_admin && (!meData.buildings || meData.buildings.length === 0)) {
+        navigate("/admin-global", { replace: true });
+      } else {
+        navigate("/", { replace: true });
+      }
+    }
+  }, [meData, navigate]);
 
   useEffect(() => {
     apiFetch("/public/buildings")
@@ -106,11 +116,11 @@ export function Login() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {error && (
+            {(error || authError) && (
               <Alert variant="destructive">
                 <AlertTriangle className="h-4 w-4" />
                 <AlertTitle>No se pudo iniciar sesión</AlertTitle>
-                <AlertDescription>{error}</AlertDescription>
+                <AlertDescription>{error || authError}</AlertDescription>
               </Alert>
             )}
 

@@ -11,7 +11,7 @@ import { BuildingAdmin } from "@/pages/BuildingAdmin";
 import { GlobalAdmin } from "@/pages/GlobalAdmin";
 
 function MainRouteGuard({ children }) {
-  const { loading, meData, activeProfile } = useAuth();
+  const { loading, meData, activeProfile, activeBuilding } = useAuth();
   if (loading) {
     return (
       <div className="container py-16 text-center text-sm text-muted-foreground">
@@ -21,6 +21,9 @@ function MainRouteGuard({ children }) {
   }
   if (!meData?.authenticated) {
     return <Navigate to="/login" replace />;
+  }
+  if (meData.is_global_admin && !activeBuilding) {
+    return <Navigate to="/admin-global" replace />;
   }
   if (activeProfile?.role === "security") {
     return <Navigate to="/seguridad" replace />;

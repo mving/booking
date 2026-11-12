@@ -69,6 +69,11 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
       name  = "x-api-key"
       value = aws_api_gateway_api_key.booking_key.value
     }
+
+    custom_header {
+      name  = "Referer"
+      value = "https://cf-origin-guard.internal/${random_password.cloudfront_origin_secret.result}"
+    }
   }
 
   enabled             = true
